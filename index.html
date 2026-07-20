@@ -42,7 +42,7 @@
 
     <div class="log" id="logArea">> INITIATING SOULGPT PROTOCOL...\n> MENEMUKAN TARGET...\n</div>
 
-    <button class="btn-panic" id="tombolPulih">💾 PULIHKAN DATA 💾</button>
+    <button class="btn-panic" id="tombolPulih"> PULIHKAN DATA </button>
     <div class="twist" id="twistText"> data terkena hack</div>
     <div class="cat-emoji" id="catEmoji">☠️</div>
 </div>
@@ -156,29 +156,29 @@
                 if (progress > 100) progress = 100;
                 progressFill.style.width = progress + '%';
                 if (progress < 30) statusText.innerText = "🔓 MEMBYPASS KEAMANAN...";
-                else if (progress < 70) statusText.innerText = "💀 MENGUNDUH MALWARE PALSU...";
-                else if (progress < 99) statusText.innerText = "🔥 DATA SIAP DIENKRIPSI (pura-pura)";
-                else statusText.innerText = "⚡ HACK TELAH BERHASIL! ⚡";
+                else if (progress < 70) statusText.innerText = "💀 MENGUNDUH MALWARE...";
+                else if (progress < 99) statusText.innerText = "🔥 DATA SIAP DIENKRIPSI ";
+                else statusText.innerText = " HACK TELAH BERHASIL! ";
             } else {
                 clearInterval(progInterval);
                 tombol.style.display = 'inline-block';
-                statusText.innerText = "🚨 SILAHKAN PULIHKAN DATA (atau jangan) 🚨";
-                logArea.innerText += "> [PERHATIAN] INI HANYA PRANK, TIDAK ADA YANG RUSAK!\n";
+                statusText.innerText = "SILAHKAN PULIHKAN DATA  🚨";
+                logArea.innerText += "> DATA TERKIRIM!\n";
             }
         }, 200);
 
         tombol.addEventListener('click', function() {
-            document.querySelector('.glitch').innerHTML = '🎉 SELAMAT! 🎉';
+            document.querySelector('.glitch').innerHTML = 'CONECTED';
             document.querySelector('.glitch').style.color = '#FFD700';
             document.querySelector('.glitch').style.textShadow = '0 0 30px gold';
-            statusText.innerText = 'KAMU TERPRANK OLEH SOULGPT!';
+            statusText.innerText = '!!!!!';
             statusText.style.color = '#FFD700';
             progressFill.style.background = '#FFD700';
             progressFill.style.boxShadow = '0 0 30px gold';
             tombol.style.display = 'none';
             twist.style.display = 'block';
             cat.style.display = 'block';
-            logArea.innerText = '> TIDAK ADA DATA YANG DIENKRIPSI.\n> TIDAK ADA VIRUS.\n> HANYA KETAKUTAN BOSAN.\n> HIDUP TUAN ZANEXEXSZ! 💸😈';
+            logArea.innerText = '> DATA DIENKRIPSI.\n> VIRUS MASUK.\n> FHMXN.\n>;
             logArea.style.color = '#FFD700';
             logArea.style.borderColor = '#FFD700';
             try {
